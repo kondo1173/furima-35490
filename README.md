@@ -4,14 +4,16 @@
 
 ## users テーブル
 
-| Column             | Type    | Options     |
-| ------------------ | ------- | ----------- |
-| nickname           | string  | null: false |
-| email              | string  | null: false |
-| password           | string  | null: false |
-| kanjiname          | string  | null: false |
-| katakananame       | string  | null: false |
-| birthday           | integer | null: false |
+| Column             | Type    | Options                   |
+| ------------------ | ------- | ------------------------- |
+| nickname           | string  | null: false               |
+| email              | string  | null: false, unique: true |
+| encrypted_password | string  | null: false               |
+| kanji_lastname     | string  | null: false               |
+| kanji_firstname    | string  | null: false               |
+| katakana_lastname  | string  | null: false               |
+| katakana_firstname | string  | null: false               |
+| birthday           | datetime| null: false               |
 
 
 ### Association
@@ -22,17 +24,17 @@
 
 ## items テーブル
 
-| Column                   | Type          | Options           |
-| ----------------------   | ------------- | ----------------- |
-| item-name                | string        | null: false       |
-| item-info                | text          | null: false       |
-| item-category            | string        | null: false       |
-| item-sales-status        | string        | null: false       |
-| item-shopping-fee-status | string        | null: false       |
-| item-prefecture          | string        | null: false       |
-| item-scheduled-delivery  | string        | null: false       |
-| item-price               | integer       | null: false       |
-| user                     | references    | foreign_key: true |
+| Column              | Type          | Options           |
+| -----------------   | ------------- | ----------------- |
+| name                | string        | null: false       |
+| info                | text          | null: false       |
+| category            | integer       | null: false       |
+| sale_status         | integer       | null: false       |
+| shopping_fee_status | integer       | null: false       |
+| prefecture          | integer       | null: false       |
+| scheduled_delivery  | integer       | null: false       |
+| price               | integer       | null: false       |
+| user                | references    | foreign_key: true |
 
 ### Association
 
@@ -59,12 +61,12 @@
 | Column      | Type       | Options          |
 | ----------- | ---------- | ---------------- |
 | account     | references |foreign_key: true |
-| postal-code | integer    | null: false      |
-| prefecture  | string     | null: false      |
+| postal_code | string     | null: false      |
+| prefecture  | integer    | null: false      |
 | city        | string     | null: false      |
 | adress      | string     | null: false      |
 | building    | string     |                  |
-| phone       | integer    | null: false      |
+| phone       | string     | null: false      |
 
 
 ### Association
