@@ -33,6 +33,35 @@ RSpec.describe User, type: :model do
           expect(@user.errors.full_messages).to include("Password confirmation doesn't match Password")
         end
 
+        it 'password:半角英字のみの場合、登録できない' do
+          @user.password = 'aaaaaaa'
+          @user.valid?
+          expect(@user.errors.full_messages).to include('Password Include both letters and numbers')
+        end
+
+        it 'password:半角数字のみの場合、登録できない' do
+          @user.password = '123456'
+          @user.valid?
+          expect(@user.errors.full_messages).to include('Password Include both letters and numbers')
+        end
+
+        it 'password:全角の場合、登録できない' do
+          @user.password = '１２３４５６'
+          @user.valid?
+          expect(@user.errors.full_messages).to include('Password Include both letters and numbers')
+        end
+
+
+        it 'passwordが６文字より少ない場合は登録できない' do
+          @user.password = '12345'
+          @user.password_confirmation = '12345'
+          @user.valid?
+          expect(@user.errors.full_messages).to include('Password is too short (minimum is 6 characters)')
+        end
+
+
+
+
         it '重複したemailが存在する場合登録できない' do
           @user.save
           another_user = FactoryBot.build(:user, email: @user.email)
@@ -40,11 +69,6 @@ RSpec.describe User, type: :model do
           expect(another_user.errors.full_messages).to include('Email has already been taken')
         end
 
-        it 'password:半角英数混合(半角英語のみ)でないと登録できない' do
-          @user.password = 'aaaaaaa'
-          @user.valid?
-          expect(@user.errors.full_messages).to include('Password Include both letters and numbers')
-        end
 
         it '生年月日が空では登録できない' do
           @user.birthday = ''
@@ -77,19 +101,33 @@ RSpec.describe User, type: :model do
         end
       end
 
+
+
+
+
+
+
       context '新規登録がうまくいく時' do
         it 'nickname,email,passwordとpassword_confirmationとお名前（全角）及びお名前（カナ全角）、生年月日が存在すれば登録できること' do
           expect(@user).to be_valid
         end
 
         it 'passwordが6文字以上であれば登録できること' do
-          @user.password = '12345A'
-          @user.password_confirmation = '12345A'
+          @user.password = '12345a'
+          @user.password_confirmation = '12345a'
           expect(@user).to be_valid
         end
+
+        it 'passwordは、半角英数字混合での入力が必須であること' do
+          @user.password = '123abc'
+          @user.password_confirmation = '123abc'
+          expect(@user).to be_valid
+        end
+
+
+
+
       end
-
     end
-
   end
 end
