@@ -21,7 +21,7 @@ class Item < ApplicationRecord
   with_options presence: true do
     validates :name, length:{ maximum: 40 }
     validates :info, length:{ maximum: 1000 }
-    validates :price, numericality:{ greater_than: 300, less_than: 9999999, message: "is out of setting range"}
+    validates :price, numericality:{ greater_than: 299, less_than: 10000000, message: "is out of setting range"}
     validates :image
   end
 

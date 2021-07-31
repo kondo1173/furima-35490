@@ -77,6 +77,18 @@ RSpec.describe Item, type: :model do
           expect(@item.errors.full_messages).to include("Price is invalid. Input half-width characters")
         end
 
+        it "半角英数混合では登録できないこと " do
+          @item.price = "a300"
+          @item.valid?
+          expect(@item.errors.full_messages).to include("Price is invalid. Input half-width characters")
+        end
+
+        it "半角英語だけでは登録できないこと " do
+          @item.price = "aaa"
+          @item.valid?
+          expect(@item.errors.full_messages).to include("Price is invalid. Input half-width characters")
+        end
+
 
         it "ユーザーが紐づいていないと出品できない" do
           @item.user = nil
