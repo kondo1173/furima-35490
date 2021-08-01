@@ -2,7 +2,9 @@ class ItemsController < ApplicationController
   before_action :authenticate_user!, except: [:index, :show]
 
   def index
-    @items = Item.includes(:user).order('created_at DESC')
+    @items = Item.order('created_at DESC')
+    # furimaのindexアクション内ではusersテーブルにアクセスせず、N+1問題が発生しないため,@items = Item.includes(:user).order('created_at DESC')より上記となる。
+
   end
 
   def new
