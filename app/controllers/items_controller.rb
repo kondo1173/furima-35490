@@ -5,6 +5,7 @@ class ItemsController < ApplicationController
 
   def index
     @items = Item.order('created_at DESC')
+    # 復習時の見返しのためコメント残します
     # furimaのindexアクション内ではusersテーブルにアクセスせず、N+1問題が発生しないため,@items = Item.includes(:user).order('created_at DESC')より上記となる。
   end
 
