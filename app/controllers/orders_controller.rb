@@ -2,7 +2,6 @@ class OrdersController < ApplicationController
 
   def index
     @account_destination = AccountDestination.new
-
     @item = Item.find(params[:item_id])
   end
 
@@ -15,7 +14,7 @@ class OrdersController < ApplicationController
       @account_destination.save
       redirect_to root_path
     else
-      render :new
+      render :index
     end
   end
 

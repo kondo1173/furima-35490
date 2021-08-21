@@ -4,11 +4,11 @@ class AccountDestination
 
 
   with_options presence: true do
-    validates :postal_code
-    validates :prefecture_id
+    validates :postal_code, format: {with: /\A[0-9]{3}-[0-9]{4}\z/, message: "is invalid. Include hyphen(-)"} 
+    validates :prefecture_id, numericality: {other_than: 1, message: "Select"}
     validates :city
     validates :address
-    validates :phone 
+    validates :phone, format: {with: /\A\d{10,11}\z/, message: " number Input only number"} 
   end
 
   def save
