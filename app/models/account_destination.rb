@@ -8,8 +8,10 @@ class AccountDestination
     validates :prefecture_id, numericality: {other_than: 1, message: "Select"}
     validates :city
     validates :address
-    validates :phone, format: {with: /\A\d{10,11}\z/, message: " number Input only number"} 
+    validates :phone, format: {with: /\A\d{11}\z/, message: "number Input only number"} 
+    validates :user_id 
   end
+
 
   def save
     account = Account.create(item_id: item_id, user_id: user_id)
