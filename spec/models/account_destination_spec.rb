@@ -62,6 +62,15 @@ RSpec.describe AccountDestination, type: :model do
         expect(@account_destination.errors.full_messages).to include("User can't be blank")
       end
 
+      it "tokenが空では登録できないこと" do
+        @account_destination.token = nil
+        @account_destination.valid?
+        expect(@account_destination.errors.full_messages).to include("Token can't be blank")
+      end
+
+
+
+
     end
 
   end
