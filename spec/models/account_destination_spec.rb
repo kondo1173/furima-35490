@@ -32,7 +32,7 @@ RSpec.describe AccountDestination, type: :model do
       it 'prefectureを選択していないと保存できないこと' do
         @account_destination.prefecture_id = 1
         @account_destination.valid?
-        expect(@account_destination.errors.full_messages).to include("Prefecture Select")
+        expect(@account_destination.errors.full_messages).to include('Prefecture Select')
       end
       it 'Addressが空だと保存できないこと' do
         @account_destination.address = ''
@@ -62,16 +62,11 @@ RSpec.describe AccountDestination, type: :model do
         expect(@account_destination.errors.full_messages).to include("User can't be blank")
       end
 
-      it "tokenが空では登録できないこと" do
+      it 'tokenが空では登録できないこと' do
         @account_destination.token = nil
         @account_destination.valid?
         expect(@account_destination.errors.full_messages).to include("Token can't be blank")
       end
-
-
-
-
     end
-
   end
 end

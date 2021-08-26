@@ -4,7 +4,6 @@ class ItemsController < ApplicationController
   before_action :move_to_index, only: [:edit, :destroy]
   before_action :sold_out_item, only: [:edit]
 
-
   def index
     @items = Item.order('created_at DESC')
     # 復習時の見返しのためコメント残します
@@ -62,5 +61,4 @@ class ItemsController < ApplicationController
   def sold_out_item
     redirect_to root_path if @item.account.present?
   end
-
 end
