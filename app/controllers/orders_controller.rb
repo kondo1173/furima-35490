@@ -1,6 +1,6 @@
 class OrdersController < ApplicationController
   before_action :authenticate_user!, only: [:index, :create]
-  before_action :sold_out_item, only: [:index]
+  before_action :move_to_index, only: [:index, :create]
 
   def index
     @account_destination = AccountDestination.new
@@ -37,8 +37,8 @@ class OrdersController < ApplicationController
     )
   end
 
-  def sold_out_item
+  def move_to_index
     @item = Item.find(params[:item_id])
-    redirect_to root_path if @item.account.present?
+    redirect_to root_path if @item.account.present? || current_user.id == @item.user_id
   end
 end
