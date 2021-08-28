@@ -4,14 +4,11 @@ class OrdersController < ApplicationController
 
   def index
     @account_destination = AccountDestination.new
-    @item = Item.find(params[:item_id])
   end
 
   def create
-    @item = Item.find(params[:item_id])
     @account_destination = AccountDestination.new(account_params)
     if @account_destination.valid?
-      Payjp.api_key = 'sk_test_410158a977e130f05dd08142'  # 自身のPAY.JPテスト秘密鍵を記述しましょう
       pay_item
       @account_destination.save
       redirect_to root_path

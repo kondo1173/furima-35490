@@ -8,6 +8,7 @@
     </h2>
     <div class="item-img-content">
       <%= image_tag @item.image ,class:"item-box-img" %>
+      <%# 復習時の為、コメント残します。 %>
       <%# 商品が売れている場合は、sold outを表示しましょう %>
       <% if @item.account.present? %>
       <div class="sold-out">
@@ -25,6 +26,7 @@
       </span>
     </div>
 
+    <%# 復習時の為、コメント残します。 %>
     <%# ログインしているユーザかつ出品者、そして商品がある場合（＠item.accoount＝購入情報がない）の時だけ編集・削除ページ出現 %>
     <%# if 'ユーザーがログインしている 且つ 商品が出品中である' %>
     <% if user_signed_in? && @item.account == nil %>

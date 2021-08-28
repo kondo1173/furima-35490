@@ -10,6 +10,7 @@ class AccountDestination
     validates :phone, format: { with: /\A\d{11}\z/, message: 'number Input only number' }
     validates :user_id
     validates :token
+    validates :item_id
   end
 
   def save

@@ -3,6 +3,7 @@ require 'rails_helper'
 RSpec.describe AccountDestination, type: :model do
   describe '配送先情報の保存' do
     before do
+      @item = FactoryBot.build(:item)
       user = FactoryBot.create(:user)
       @account_destination = FactoryBot.build(:account_destination, user_id: user.id)
     end
@@ -67,6 +68,14 @@ RSpec.describe AccountDestination, type: :model do
         @account_destination.valid?
         expect(@account_destination.errors.full_messages).to include("Token can't be blank")
       end
+
+      it 'item_idが空では登録できないこと' do
+        @account_destination.item_id = nil
+        @account_destination.valid?
+        expect(@account_destination.errors.full_messages).to include("Item can't be blank")
+      end
+
+
     end
   end
 end
