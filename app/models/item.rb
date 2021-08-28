@@ -7,6 +7,7 @@ class Item < ApplicationRecord
   belongs_to :shopping_fee_status
 
   belongs_to :user
+  has_one :account
   has_one_attached :image
 
   with_options presence: true, numericality: { other_than: 1, message: "can't be blank" } do
