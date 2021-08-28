@@ -3,9 +3,10 @@ require 'rails_helper'
 RSpec.describe AccountDestination, type: :model do
   describe '配送先情報の保存' do
     before do
-      @item = FactoryBot.build(:item)
       user = FactoryBot.create(:user)
-      @account_destination = FactoryBot.build(:account_destination, user_id: user.id)
+      item = FactoryBot.create(:item)
+      @account_destination = FactoryBot.build(:account_destination, user_id: user.id, item_id: item.id)
+      sleep 0.1
     end
 
     context '内容に問題ない場合' do
@@ -57,6 +58,26 @@ RSpec.describe AccountDestination, type: :model do
         @account_destination.valid?
         expect(@account_destination.errors.full_messages).to include('Phone number Input only number')
       end
+
+      it '電話番号が9桁以下では保存できないこと' do
+        @account_destination.phone = '123456789'
+        @account_destination.valid?
+        expect(@account_destination.errors.full_messages).to include('Phone number Input only number')
+      end
+
+      it '電話番号が12桁以上では保存できないこと' do
+        @account_destination.phone = '090123456789'
+        @account_destination.valid?
+        expect(@account_destination.errors.full_messages).to include('Phone number Input only number')
+      end
+
+      it '電話番号が英数字混合では保存できないこと' do
+        @account_destination.phone = 'abc12345678'
+        @account_destination.valid?
+        expect(@account_destination.errors.full_messages).to include('Phone number Input only number')
+      end
+
+
       it 'userが紐付いていないと購入できないこと' do
         @account_destination.user_id = nil
         @account_destination.valid?
