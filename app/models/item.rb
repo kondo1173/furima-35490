@@ -9,6 +9,7 @@ class Item < ApplicationRecord
   belongs_to :user
   has_one :account
   has_one_attached :image
+  has_many :comments
 
   with_options presence: true, numericality: { other_than: 1, message: "can't be blank" } do
     validates :category_id

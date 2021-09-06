@@ -13,8 +13,8 @@
       フリマアプリです
     </p>
     <div class='store-btn'>
-      <%= link_to image_tag("app-store.svg", class:"apple-btn"), "#" %>
-      <%= link_to image_tag("google-play.png", class:"google-btn"), "#" %>
+      <%= link_to image_tag("app-store.svg", class:"apple-btn"), "https://www.apple.com/jp/app-store/" %>
+      <%= link_to image_tag("google-play.png", class:"google-btn"), "https://play.google.com/store/" %>
     </div>
   </div>
   <%# /画面上部の「人生を変えるフリマアプリ」帯部分  %>
@@ -77,8 +77,8 @@
       ほしかったあの商品に出会えるかもしれません。
     </p>
     <div class='store-btn'>
-      <%= link_to image_tag("app-store.svg", class:"apple-btn"), "#" %>
-      <%= link_to image_tag("google-play.png", class:"google-btn"), "#" %>
+      <%= link_to image_tag("app-store.svg", class:"apple-btn"), "https://www.apple.com/jp/app-store/" %>
+      <%= link_to image_tag("google-play.png", class:"google-btn"), "https://play.google.com/store/" %>
     </div>
   </div>
   <%# /画面中央の「会員数日本一位」帯部分 %>
@@ -137,7 +137,6 @@
           <div class='item-img-content'>
              <%= image_tag item.image, class: "item-img" %>
 
-              <%# 復習時の為、コメント残します。 %>
               <%# 商品が売れていればsold outを表示しましょう %>
               <% if item.account.present? %>
               <div class='sold-out'>
@@ -145,7 +144,6 @@
               </div>
               <% end %>
               <%# //商品が売れていればsold outを表示しましょう %>
-              
           </div>
 
           <div class='item-info'>
