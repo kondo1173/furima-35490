@@ -7,6 +7,11 @@ crumb :new_item do
   parent :root
 end
 
+crumb :search_items do
+  link "検索結果ページ", search_items_path
+  parent :root
+end
+
 
 crumb :item_show do |item|
   link "#{item.name}の商品詳細", item_path(item)
