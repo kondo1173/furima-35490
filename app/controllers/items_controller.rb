@@ -3,6 +3,8 @@ class ItemsController < ApplicationController
   before_action :set_item, only: [:show, :edit, :update, :destroy]
   before_action :move_to_index, only: [:edit, :destroy]
   before_action :sold_out_item, only: [:edit, :update, :destroy]
+  before_action :search_item, only: [:index, :search, :show]
+
 
   def index
     @items = Item.order('created_at DESC')
@@ -45,6 +47,12 @@ class ItemsController < ApplicationController
     redirect_to root_path
   end
 
+  def search
+    @results = @p.result.includes(:user)
+  end
+
+
+
   private
 
   def item_params
@@ -63,4 +71,12 @@ class ItemsController < ApplicationController
   def sold_out_item
     redirect_to root_path if @item.account.present?
   end
+
+
+  def search_item
+    @p = Item.ransack(params[:q])  # 検索オブジェクトを生成
+  end
+
+
+
 end
