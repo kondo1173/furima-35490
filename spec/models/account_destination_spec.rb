@@ -29,12 +29,12 @@ RSpec.describe AccountDestination, type: :model do
       it 'postal_codeが半角のハイフンを含んだ正しい形式でないと保存できないこと' do
         @account_destination.postal_code = '1234567'
         @account_destination.valid?
-        expect(@account_destination.errors.full_messages).to include('Postal code is invalid. Include hyphen(-)')
+        expect(@account_destination.errors.full_messages).to include('Postal code は、ハイフン(-)を入れて入力してください。')
       end
       it 'prefectureを選択していないと保存できないこと' do
         @account_destination.prefecture_id = 1
         @account_destination.valid?
-        expect(@account_destination.errors.full_messages).to include('Prefecture Select')
+        expect(@account_destination.errors.full_messages).to include('Prefecture を選択してください。')
       end
       it 'Addressが空だと保存できないこと' do
         @account_destination.address = ''
@@ -56,25 +56,25 @@ RSpec.describe AccountDestination, type: :model do
       it '電話番号が11桁以内の数字でないと保存できないこと' do
         @account_destination.phone = '0901234566789'
         @account_destination.valid?
-        expect(@account_destination.errors.full_messages).to include('Phone number Input only number')
+        expect(@account_destination.errors.full_messages).to include('Phone は、半角数字で入力してください。')
       end
 
       it '電話番号が9桁以下では保存できないこと' do
         @account_destination.phone = '123456789'
         @account_destination.valid?
-        expect(@account_destination.errors.full_messages).to include('Phone number Input only number')
+        expect(@account_destination.errors.full_messages).to include('Phone は、半角数字で入力してください。')
       end
 
       it '電話番号が12桁以上では保存できないこと' do
         @account_destination.phone = '090123456789'
         @account_destination.valid?
-        expect(@account_destination.errors.full_messages).to include('Phone number Input only number')
+        expect(@account_destination.errors.full_messages).to include('Phone は、半角数字で入力してください。')
       end
 
       it '電話番号が英数字混合では保存できないこと' do
         @account_destination.phone = 'abc12345678'
         @account_destination.valid?
-        expect(@account_destination.errors.full_messages).to include('Phone number Input only number')
+        expect(@account_destination.errors.full_messages).to include('Phone は、半角数字で入力してください。')
       end
 
 

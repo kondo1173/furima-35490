@@ -23,7 +23,7 @@ RSpec.describe User, type: :model do
         it 'passwordが空では登録できない' do
           @user.password = ''
           @user.valid?
-          expect(@user.errors.full_messages).to include("Password can't be blank")
+          expect(@user.errors.full_messages).to include("Password は、６文字以上の半角英数字で設定してください")
         end
 
         it 'passwordが存在してもpassword_confirmationが空では登録できない' do
@@ -35,26 +35,26 @@ RSpec.describe User, type: :model do
         it 'password:半角英字のみの場合、登録できない' do
           @user.password = 'aaaaaaa'
           @user.valid?
-          expect(@user.errors.full_messages).to include('Password Include both letters and numbers')
+          expect(@user.errors.full_messages).to include('Password は、６文字以上の半角英数字で設定してください')
         end
 
         it 'password:半角数字のみの場合、登録できない' do
           @user.password = '123456'
           @user.valid?
-          expect(@user.errors.full_messages).to include('Password Include both letters and numbers')
+          expect(@user.errors.full_messages).to include('Password は、６文字以上の半角英数字で設定してください')
         end
 
         it 'password:全角の場合、登録できない' do
           @user.password = '１２３４５６'
           @user.valid?
-          expect(@user.errors.full_messages).to include('Password Include both letters and numbers')
+          expect(@user.errors.full_messages).to include('Password は、６文字以上の半角英数字で設定してください')
         end
 
         it 'passwordが６文字より少ない場合は登録できない' do
           @user.password = '12345'
           @user.password_confirmation = '12345'
           @user.valid?
-          expect(@user.errors.full_messages).to include('Password is too short (minimum is 6 characters)')
+          expect(@user.errors.full_messages).to include('Password は、６文字以上の半角英数字で設定してください')
         end
 
         it '重複したemailが存在する場合登録できない' do
