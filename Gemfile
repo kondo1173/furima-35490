@@ -78,3 +78,4 @@ gem "aws-sdk-s3", require: false
 gem "gretel"
 
 gem 'ransack'
+gem 'rails-i18n'
