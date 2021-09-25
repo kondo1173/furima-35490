@@ -1,0 +1,6 @@
+.search_container {
+  position: relative;
+  width: 600px;
+  box-sizing: border-box;
+  margin-top: 15px;
+}
