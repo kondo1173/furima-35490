@@ -1,6 +1,35 @@
 <% breadcrumb :search_items %>
 <%= render "devise/shared/header" %>
 
+<div class="item-search">
+<h1>
+  商品検索
+</h1>
+<%= search_form_for @p, url: search_items_path, class:"search_container" do |f| %>
+  <%= f.label :category_id_in, 'カテゴリー' %> 
+  <%= f.collection_select(:category_id_in, Category.all, :id, :name, {include_blank: "--"}, {class:"select-box", id:"item-category"}) %>
+  <br>
+  <%= f.label :price, '価格：' %>
+  <%= f.radio_button :price_lteq, '' %>
+  指定なし
+  <%= f.radio_button :price_lteq, '10000' %>
+  10000円以下
+  <%= f.radio_button :price_lteq, '20000' %>
+  20000円以下
+  <%= f.radio_button :price_lteq, '50000' %>
+  50000円以下
+  <br>
+  <%= f.submit '検索' %>
+<% end %>
+
+</div>
+
+
+
+
+
+
+
 
 <div class='item-contents'>
   <h2 class='title'>検索結果</h2>
