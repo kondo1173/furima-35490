@@ -79,3 +79,4 @@ gem "gretel"
 
 gem 'ransack'
 gem 'rails-i18n'
+
